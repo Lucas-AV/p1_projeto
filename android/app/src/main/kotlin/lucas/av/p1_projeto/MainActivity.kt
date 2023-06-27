@@ -1,0 +1,6 @@
+package lucas.av.p1_projeto
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
