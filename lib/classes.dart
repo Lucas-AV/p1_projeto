@@ -18,11 +18,12 @@ class Contato extends Card {
 }
 
 class Residencia {
-  String cnpj;
+  String usuario;
+  String nome;
   String senha;
   List<Morador> moradores;
   List<Aviso> avisos;
-  Residencia(this.cnpj,this.senha,this.moradores,this.avisos);
+  Residencia(this.usuario,this.nome,this.senha,this.moradores,this.avisos);
 }
 
 class Morador{
