@@ -232,7 +232,6 @@ class _DesktopPageState extends State<DesktopPage> {
     );
   }
 
-
   Widget sensorCard({String title = "Sensores de fumaça", IconData icon = Icons.sensors}){
     return Stack(
       children: [
