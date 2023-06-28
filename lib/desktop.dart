@@ -46,10 +46,10 @@ class _DesktopPageState extends State<DesktopPage> {
   ];
 
   List<Morador> moradores = [
-    Morador('João', '123.456.789-00'),
-    Morador('Maria', '987.654.321-00'),
-    Morador('Pedro', '111.222.333-00'),
-    Morador('Lucas', '111.222.333-00')
+    Morador('João', '123.456.789-00',[]),
+    Morador('Maria', '987.654.321-00',[]),
+    Morador('Pedro', '111.222.333-00',[]),
+    Morador('Lucas', '111.222.333-00',[])
   ];
 
   Widget avisoCard(Aviso aviso){

@@ -45,7 +45,6 @@ class Aviso {
 
 class Alerta extends Aviso {
   String mode;
-
   Alerta(String title, String details, IconData icon, this.mode) : super(title, details, icon);
 }
 
@@ -58,8 +57,10 @@ class Address {
 class Morador{
   String nome;
   String cpf;
-  Morador(this.nome,this.cpf);
+  List<Address> residencias;
+  Morador(this.nome,this.cpf,this.residencias);
 }
+
 
 class Contact {
   String nome;
@@ -90,8 +91,91 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "FIAL",
-      home: LoginPage(),
+      home: Mode(),
     );
   }
 }
 
+class Mode extends StatefulWidget {
+  const Mode({Key? key}) : super(key: key);
+
+  @override
+  State<Mode> createState() => _ModeState();
+}
+
+class _ModeState extends State<Mode> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: const [
+                      Colors.black,
+                      Color(0xFF000000),
+                      Color(0xFF111111),
+                      Color(0xFF222222),
+                    ],
+                  )
+              ),
+            ),
+            Positioned(
+              top: 128,
+              child: Text(
+                "FIRE ALERT",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 64
+                )
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DesktopPage()));
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 48,vertical: 24),
+                      child: Text("APLICAÇÃO\nDESKTOP",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 36),textAlign: TextAlign.center),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 48,vertical: 24),
+                      child: Text("APLICAÇÃO\nMOBILE",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 36),textAlign: TextAlign.center),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
