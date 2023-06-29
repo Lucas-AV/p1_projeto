@@ -46,10 +46,10 @@ class _DesktopPageState extends State<DesktopPage> {
   ];
 
   List<Morador> moradores = [
-    Morador('João', '123.456.789-00',[]),
-    Morador('Maria', '987.654.321-00',[]),
-    Morador('Pedro', '111.222.333-00',[]),
-    Morador('Lucas', '111.222.333-00',[])
+    Morador('João', '123.456.789-00'),
+    Morador('Maria', '987.654.321-00'),
+    Morador('Pedro', '111.222.333-00'),
+    Morador('Lucas', '111.222.333-00')
   ];
 
   Widget avisoCard(Aviso aviso){
@@ -231,6 +231,7 @@ class _DesktopPageState extends State<DesktopPage> {
       ],
     );
   }
+
 
   Widget sensorCard({String title = "Sensores de fumaça", IconData icon = Icons.sensors}){
     return Stack(
@@ -437,41 +438,6 @@ class _DesktopPageState extends State<DesktopPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          actions: [
-            PopupMenuButton(
-              tooltip: "",
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  value: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("Logout do sistema"),
-                      Icon(Icons.logout,color: Colors.black)
-                    ],
-                  ),
-                  onTap: (){
-                    setState(() {
-                      Navigator.pop(context);
-                    });
-                  },
-                ),
-              ],
-              child: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 32,
-                ),
-              ),
-
-            ),
-          ],
-        ),
         backgroundColor: Color(0xff1E1E1E),
         body: Row(
           children: [
@@ -483,18 +449,6 @@ class _DesktopPageState extends State<DesktopPage> {
                       underlineWidth: 120,
                       bottomButton: Row(
                         children: [
-                          // RawMaterialButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     decoration: BoxDecoration(
-                          //       color: Colors.white,
-                          //       borderRadius: BorderRadius.circular(7.5),
-                          //     ),
-                          //     padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                          //     child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                          //   ),
-                          // ),
-                          // SizedBox(width: 15),
                           RawMaterialButton(
                             onPressed: (){},
                             child: Container(
@@ -503,10 +457,10 @@ class _DesktopPageState extends State<DesktopPage> {
                                 borderRadius: BorderRadius.circular(7.5),
                               ),
                               padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                              child: const Center(child: Text("Cadastrar\naviso",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                              child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
                             ),
                           ),
-                          const SizedBox(width: 15),
+                          SizedBox(width: 15),
                           RawMaterialButton(
                             onPressed: (){},
                             child: Container(
@@ -515,7 +469,7 @@ class _DesktopPageState extends State<DesktopPage> {
                                 borderRadius: BorderRadius.circular(7.5),
                               ),
                               padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                              child: const Center(child: Text("Cadastrar\ncontato",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                              child: Center(child: Text("Cadastrar\naviso",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
                             ),
                           ),
                         ],
@@ -530,18 +484,18 @@ class _DesktopPageState extends State<DesktopPage> {
                       underlineWidth: 250,
                       bottomButton: Row(
                         children: [
-                          // RawMaterialButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     decoration: BoxDecoration(
-                          //       color: Colors.white,
-                          //       borderRadius: BorderRadius.circular(7.5),
-                          //     ),
-                          //     padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                          //     child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                          //   ),
-                          // ),
-                          // SizedBox(width: 15),
+                          RawMaterialButton(
+                            onPressed: (){},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(7.5),
+                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
+                              child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                            ),
+                          ),
+                          SizedBox(width: 15),
                           RawMaterialButton(
                             onPressed: (){},
                             child: Container(
@@ -600,21 +554,21 @@ class _DesktopPageState extends State<DesktopPage> {
                       relatoriosCard(title:"Relatório diário",date: "04/06/2023"),
                       relatoriosCard(title:"Relatório diário",date: "28/05/2023"),
                     ],
-                    // bottomButton: Row(
-                    //   children: [
-                    //     RawMaterialButton(
-                    //       onPressed: (){},
-                    //       child: Container(
-                    //         decoration: BoxDecoration(
-                    //           color: Colors.white,
-                    //           borderRadius: BorderRadius.circular(7.5),
-                    //         ),
-                    //         padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                    //         child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    bottomButton: Row(
+                      children: [
+                        RawMaterialButton(
+                          onPressed: (){},
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(7.5),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
+                            child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
