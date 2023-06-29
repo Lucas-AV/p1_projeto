@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math';
-import 'home_page.dart';
+import 'mobile.dart';
 import 'login_page.dart';
 import 'dart:io';
 import 'desktop.dart';
@@ -106,6 +106,8 @@ class Mode extends StatefulWidget {
 class _ModeState extends State<Mode> {
   @override
   Widget build(BuildContext context) {
+    // return HomePage();
+
     return SafeArea(
       child: Scaffold(
         body: Stack(

@@ -192,118 +192,139 @@ class _HomePageState extends State<HomePage> {
     exemplos[index].inAlarm = exemplos[index].avisos.any((aviso) => getMode(aviso).isNotEmpty);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: !exemplos[index].inAlarm? Colors.blue:gradients[tripleVerify()]!.first,//Colors.deepOrange,
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          title: LayoutBuilder(
-            builder: (context, constraints){
-              return FittedBox(
-                child: Text(
-                  exemplos[index].nome,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              );
-            },
-          ),
-          elevation: 5,
-          actions: [
-            PopupMenuButton(
-              tooltip: "",
-              itemBuilder: (context) => [
-                for(Address item in exemplos)
-                  PopupMenuItem(
-                    value: item,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(item.nome),
-                        if(item.inAlarm)
-                          Icon(index == exemplos.indexOf(item)? Icons.warning_rounded:Icons.warning_amber_rounded,color: Colors.black,),
-                      ],
-                    ),
-                    onTap: (){
-                      setState(() {
-                        index = exemplos.indexOf(item);
-                      });
+        backgroundColor: Colors.black,
+        body: Center(
+          child: SizedBox(
+            width: 420,
+            height: 920,
+            child: Center(
+              child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: !exemplos[index].inAlarm? Colors.blue:gradients[tripleVerify()]!.first,//Colors.deepOrange,
+                  centerTitle: true,
+                  title: LayoutBuilder(
+                    builder: (context, constraints){
+                      return FittedBox(
+                        child: Text(
+                          exemplos[index].nome,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
                     },
                   ),
-              ],
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  MdiIcons.officeBuilding,
-                  color: Colors.white,
-                  size: 32,
+                  elevation: 5,
+                  actions: [
+                    PopupMenuButton(
+                      tooltip: "",
+                      itemBuilder: (context) => [
+                        for(Address item in exemplos)
+                          PopupMenuItem(
+                            value: item,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(item.nome),
+                                if(item.inAlarm)
+                                  Icon(index == exemplos.indexOf(item)? Icons.warning_rounded:Icons.warning_amber_rounded,color: Colors.black,),
+                              ],
+                            ),
+                            onTap: (){
+                              setState(() {
+                                index = exemplos.indexOf(item);
+                              });
+                            },
+                          ),
+                        PopupMenuItem(
+                          value: 4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Logout do aplicativo"),
+                              Icon(Icons.logout,color: Colors.black)
+                            ],
+                          ),
+                          onTap: (){},
+                        ),
+                      ],
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(
+                          MdiIcons.officeBuilding,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+
+                    ),
+                  ],
+                ),
+                body: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: !exemplos[index].inAlarm? [
+                        Colors.blue,
+                        Colors.lightBlue,
+                        Colors.lightBlueAccent,
+                      ] : gradients[tripleVerify()]?? [
+                        Colors.deepOrange,
+                        Colors.red,
+                        Colors.redAccent,
+                      ],
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: alarmWidget(exemplos[index]),
+                        ),
+
+                        if(exemplos[index].avisos.isNotEmpty)
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: iconDivisor(divisor: "Avisos",height: 2.5),
+                              ),
+                              for(Aviso aviso in exemplos[index].avisos)
+                                if(aviso.title != 'Alerta de incêndio')
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: cardWidget(aviso),
+                                  ),
+                            ],
+                          ),
+
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: iconDivisor(height: 2.5),
+                            ),
+                            for(Contact contact in contatos)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: contactWidget(contact,fontColor: Colors.white),
+                              )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-
-            ),
-          ],
-        ),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: !exemplos[index].inAlarm? [
-                Colors.blue,
-                Colors.lightBlue,
-                Colors.lightBlueAccent,
-              ] : gradients[tripleVerify()]?? [
-                Colors.deepOrange,
-                Colors.red,
-                Colors.redAccent,
-              ],
-            ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: alarmWidget(exemplos[index]),
-                ),
-
-                if(exemplos[index].avisos.isNotEmpty)
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: iconDivisor(divisor: "Avisos",height: 2.5),
-                      ),
-                      for(Aviso aviso in exemplos[index].avisos)
-                        if(aviso.title != 'Alerta de incêndio')
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: cardWidget(aviso),
-                        ),
-                    ],
-                  ),
-
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: iconDivisor(height: 2.5),
-                    ),
-                    for(Contact contact in contatos)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: contactWidget(contact,fontColor: Colors.white),
-                      )
-                  ],
-                )
-              ],
             ),
           ),
         ),
-      ),
+      )
     );
   }
 }
