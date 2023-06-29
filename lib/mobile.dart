@@ -246,7 +246,9 @@ class _HomePageState extends State<HomePage> {
                               Icon(Icons.logout,color: Colors.black)
                             ],
                           ),
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
                         ),
                       ],
                       child: Padding(
