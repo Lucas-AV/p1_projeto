@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "FIAL",
-      home: Mode(),
+      home: LoginPage(page: Mode()),
     );
   }
 }
@@ -107,7 +107,6 @@ class _ModeState extends State<Mode> {
   @override
   Widget build(BuildContext context) {
     // return HomePage();
-
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -174,6 +173,16 @@ class _ModeState extends State<Mode> {
                   ),
                 ),
               ],
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back,color: Colors.white),
+              ),
             )
           ],
         ),
