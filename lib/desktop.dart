@@ -14,11 +14,6 @@ class _DesktopPageState extends State<DesktopPage> {
 
   List<Aviso> listaAvisos = [
     Aviso(
-      "Manutenção nos elevadores",
-      "Manutenção nos elevadores programada para as 19h do dia 27/06 até as 22h.",
-      Icons.settings,
-    ),
-    Aviso(
       'Alerta de incêndio',
       alertMsg,
       Icons.warning_rounded,
@@ -32,6 +27,11 @@ class _DesktopPageState extends State<DesktopPage> {
       'Falta de água',
       'Prezados moradores, identificamos problemas com o encanamento e o abastecimento de água no prédio. Nossa equipe de manutenção está trabalhando para resolver a situação o mais rápido possível. Pedimos desculpas pelos transtornos causados e agradecemos pela compreensão.',
       Icons.water_drop_outlined,
+    ),
+    Aviso(
+      "Manutenção",
+      "Manutenção nos elevadores programada para as 19h do dia 27/06 até as 22h.",
+      Icons.settings,
     ),
     Aviso(
       'Piscina interditada',
@@ -119,25 +119,42 @@ class _DesktopPageState extends State<DesktopPage> {
         Positioned(
           top: 0,
           right: 0,
-          child: GestureDetector(
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black38,
-                            offset: Offset(0,3),
-                            blurRadius: 3
-                        )
-                      ]
+          child: PopupMenuButton(
+            tooltip: "",
+            itemBuilder: (context) => [
+              for(int i = 0; i < 2; i++)
+                PopupMenuItem(
+                  onTap: (){
+                    setState(() {
+                    });
+                  },
+                  value: i,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Icon([Icons.edit,Icons.delete][i],color: Colors.black,size: 24,),
+                      ),
+                      FittedBox(child: Text(["Editar","Excluir"][i])),
+                    ],
                   ),
-                  child: Icon(Icons.edit)
-              ),
+                ),
+            ],
+            child: Container(
+                height: 35,
+                width: 35,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black38,
+                          offset: Offset(0,3),
+                          blurRadius: 3
+                      )
+                    ]
+                ),
+                child: const Icon(Icons.edit)
             ),
           ),
         ),
@@ -206,25 +223,41 @@ class _DesktopPageState extends State<DesktopPage> {
         Positioned(
           top: 0,
           right: 0,
-          child: GestureDetector(
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black38,
-                            offset: Offset(0,3),
-                            blurRadius: 3
-                        )
-                      ]
+          child: PopupMenuButton(
+            tooltip: "",
+            itemBuilder: (context) => [
+              for(int i = 0; i < 2; i++)
+                PopupMenuItem(
+                  onTap: (){
+                    setState(() {});
+                  },
+                  value: i,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Icon([Icons.edit,Icons.delete][i],color: Colors.black,size: 24,),
+                      ),
+                      FittedBox(child: Text(["Editar","Excluir"][i])),
+                    ],
                   ),
-                  child: Icon(Icons.edit)
-              ),
+                ),
+            ],
+            child: Container(
+                height: 35,
+                width: 35,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black38,
+                          offset: Offset(0,3),
+                          blurRadius: 3
+                      )
+                    ]
+                ),
+                child: const Icon(Icons.edit)
             ),
           ),
         ),
@@ -272,12 +305,12 @@ class _DesktopPageState extends State<DesktopPage> {
                             ),
                           ),
 
-                          Expanded(
+                          const Expanded(
                             child: SizedBox(
                               child: SingleChildScrollView(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(right: 24),
-                                  child: Text(template,textAlign: TextAlign.justify,style: TextStyle(color: Colors.black)),
+                                  padding: EdgeInsets.only(right: 24),
+                                  child: Text("Informações sobre o sensor...",textAlign: TextAlign.justify,style: TextStyle(color: Colors.black)),
                                 ),
                               ),
                             ),
@@ -357,12 +390,12 @@ class _DesktopPageState extends State<DesktopPage> {
                         ),
                       ),
 
-                      Expanded(
+                      const Expanded(
                         child: SizedBox(
                           child: SingleChildScrollView(
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 24),
-                              child: Text(template,textAlign: TextAlign.justify,style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.only(right: 24),
+                              child: Text("Resumo do conteúdo...",textAlign: TextAlign.justify,style: TextStyle(color: Colors.black)),
                             ),
                           ),
                         ),
@@ -417,7 +450,6 @@ class _DesktopPageState extends State<DesktopPage> {
                 children: children,
               ),
             ),
-            SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -431,6 +463,393 @@ class _DesktopPageState extends State<DesktopPage> {
         ),
       ),
     );
+  }
+
+  bool createMorador = false;
+  bool createContato = false;
+  bool createAviso = false;
+
+  Widget wLogin(double fontSize){
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.zero,
+        child: GestureDetector(
+          onTap: (){
+            setState(() {
+              createAviso = false;
+              createMorador = false;
+              createContato = false;
+            });
+          },
+          child: Container(
+            decoration: const BoxDecoration(
+                color: Colors.blue,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 3,
+                    offset: Offset(0, 3),
+                  )
+                ],
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(10))
+            ),
+            child: Center(child: Text("Cadastrar",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: fontSize))),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget wMorador(){
+    return createMorador? GestureDetector(
+      onTap: (){
+        setState(() {
+          createMorador = false;
+        });
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.black45,
+        child: Center(
+          child: Container(
+            width: 660,
+            height: 540,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10)
+            ),
+            child: LayoutBuilder(
+              builder: (context,constraints){
+                return Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text("CADASTRO DE MORADOR",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 36),),
+                    ),
+
+                    for(int i = 0; i < 3; i++)
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: constraints.maxHeight*0.015),
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 525,maxHeight: 100),
+                          width: double.infinity,
+                          height: constraints.maxHeight*0.2,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LayoutBuilder(
+                            builder: (context,constraints){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 18),
+                                      child: Icon([Icons.person_rounded,Icons.credit_card,Icons.phone][i],color: Colors.black,size: constraints.maxHeight*.6),
+                                    ),
+                                    Expanded(
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: ["Nome","CPF","Telefone"][i],
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: constraints.maxHeight*.35,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    wLogin(constraints.maxHeight*.10),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    ) : const SizedBox();
+  }
+
+  Widget wContato(){
+    return createContato? GestureDetector(
+      onTap: (){
+        setState(() {
+          createContato = false;
+        });
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.black45,
+        child: Center(
+          child: Container(
+            width: 660,
+            height: 420,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10)
+            ),
+            child: LayoutBuilder(
+              builder: (context,constraints){
+                return Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text("CADASTRO DE CONTATO DE EMERGÊNCIA",
+
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 36),),
+                    ),
+
+                    for(int i = 0; i < 2; i++)
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: constraints.maxHeight*0.015),
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 525,maxHeight: 100),
+                          width: double.infinity,
+                          height: constraints.maxHeight*0.2,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LayoutBuilder(
+                            builder: (context,constraints){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 18),
+                                      child: Icon([Icons.person_rounded, Icons.phone][i],color: Colors.black,size: constraints.maxHeight*.6),
+                                    ),
+                                    Expanded(
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: ["Nome","Telefone"][i],
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: constraints.maxHeight*.35,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    wLogin(constraints.maxHeight*.10),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    ) : const SizedBox();
+  }
+
+  int avisoIDX = 0;
+  Widget wAviso(){
+    return createAviso? GestureDetector(
+      onTap: (){
+        setState(() {
+          createAviso = false;
+        });
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.black45,
+        child: Center(
+          child: Container(
+            width: 660,
+            height: 540,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10)
+            ),
+            child: LayoutBuilder(
+              builder: (context,constraints){
+                return Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text("CADASTRAR AVISO",
+
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 36),),
+                    ),
+
+                    for(int i = 0; i < 2; i++)
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: constraints.maxHeight*0.015),
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 525,maxHeight: 100),
+                          width: double.infinity,
+                          height: constraints.maxHeight*0.2,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LayoutBuilder(
+                            builder: (context,constraints){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 18),
+                                      child: Icon([Icons.person_rounded,Icons.info][i],color: Colors.black,size: constraints.maxHeight*.6),
+                                    ),
+                                    Expanded(
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: ["Título","Descrição"][i],
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: constraints.maxHeight*.35,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+
+                    PopupMenuButton(
+                      tooltip: "",
+                      itemBuilder: (context) => [
+                        for(int i = 0; i < listaAvisos.length; i++)
+                          PopupMenuItem(
+                            onTap: (){
+                              setState(() {
+                                avisoIDX = i;
+                              });
+                            },
+                            value: i,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: Icon(listaAvisos[i].icon,color: Colors.black,size: 36,),
+                                ),
+                                FittedBox(child: Text(listaAvisos[i].title)),
+                              ],
+                            ),
+                          ),
+                      ],
+                      offset: const Offset(0,100),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: constraints.maxHeight*0.015),
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 525,maxHeight: 100),
+                          width: double.infinity,
+                          height: constraints.maxHeight*0.2,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LayoutBuilder(
+                            builder: (context,constraints){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 18),
+                                      child: Icon(listaAvisos[avisoIDX].icon,color: Colors.black,size: constraints.maxHeight*.6),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        listaAvisos[avisoIDX].title,
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: constraints.maxHeight*.35,
+                                        ),
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8.0),
+                                      child: Icon(Icons.arrow_drop_down,color: Colors.black,size: 36),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    wLogin(constraints.maxHeight*.10),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    ) : const SizedBox();
   }
 
   @override
@@ -472,156 +891,120 @@ class _DesktopPageState extends State<DesktopPage> {
             ),
           ],
         ),
-        backgroundColor: Color(0xff1E1E1E),
-        body: Row(
+        backgroundColor: const Color(0xff1E1E1E),
+        body: Stack(
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  sector(
-                      title: "Aviso",
-                      underlineWidth: 120,
-                      bottomButton: Row(
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      sector(
+                          title: "Aviso",
+                          underlineWidth: 120,
+                          bottomButton: Row(
+                            children: [
+                              RawMaterialButton(
+                                onPressed: (){
+                                  setState(() {
+                                    createAviso = true;
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7.5),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
+                                  child: const Center(child: Text("Cadastrar\naviso",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              RawMaterialButton(
+                                onPressed: (){
+                                  setState(() {
+                                    createContato = true;
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7.5),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
+                                  child: const Center(child: Text("Cadastrar\ncontato",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                                ),
+                              ),
+                            ],
+                          ),
+                          children: [
+                            for(Aviso aviso in listaAvisos)
+                              avisoCard(aviso)
+                          ]
+                      ),
+                      sector(
+                          title: "Moradores",
+                          underlineWidth: 250,
+                          bottomButton: Row(
+                            children: [
+                              RawMaterialButton(
+                                onPressed: (){
+                                  setState(() {
+                                    createMorador = true;
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7.5),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
+                                  child: const Center(child: Text("Cadastrar\nmorador",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
+                                ),
+                              ),
+                            ],
+                          ),
+                          children: [
+                            for(Morador morador in moradores)
+                              personCard(morador)
+                          ]
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      sector(
+                        title: "Status dos sensores",
+                        underlineWidth: 500,
                         children: [
-                          // RawMaterialButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     decoration: BoxDecoration(
-                          //       color: Colors.white,
-                          //       borderRadius: BorderRadius.circular(7.5),
-                          //     ),
-                          //     padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                          //     child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                          //   ),
-                          // ),
-                          // SizedBox(width: 15),
-                          RawMaterialButton(
-                            onPressed: (){},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7.5),
-                              ),
-                              padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                              child: const Center(child: Text("Cadastrar\naviso",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                          RawMaterialButton(
-                            onPressed: (){},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7.5),
-                              ),
-                              padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                              child: const Center(child: Text("Cadastrar\ncontato",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                            ),
-                          ),
+                          sensorCard(title: "Sensores de fumaça",icon: Icons.sensors),
+                          sensorCard(title: "Sensores de temperatura",icon: Icons.thermostat_outlined),
+                          sensorCard(title: "Luzes de emergência",icon: MdiIcons.lightbulbOnOutline),
+                          sensorCard(title: "Fechaduras magnéticas",icon: Icons.lock_outline),
                         ],
                       ),
-                      children: [
-                        for(Aviso aviso in listaAvisos)
-                          avisoCard(aviso)
-                      ]
-                  ),
-                  sector(
-                      title: "Moradores",
-                      underlineWidth: 250,
-                      bottomButton: Row(
+                      sector(title: "Relatórios",underlineWidth: 250,
                         children: [
-                          // RawMaterialButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     decoration: BoxDecoration(
-                          //       color: Colors.white,
-                          //       borderRadius: BorderRadius.circular(7.5),
-                          //     ),
-                          //     padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                          //     child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                          //   ),
-                          // ),
-                          // SizedBox(width: 15),
-                          RawMaterialButton(
-                            onPressed: (){},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7.5),
-                              ),
-                              padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                              child: Center(child: Text("Cadastrar\nmorador",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                            ),
-                          ),
+                          relatoriosCard(title:"Relatório diário",date: "19/06/2023"),
+                          relatoriosCard(title:"Relatório diário",date: "18/06/2023"),
+                          relatoriosCard(title:"Relatório diário",date: "11/06/2023"),
+                          relatoriosCard(title:"Relatório diário",date: "04/06/2023"),
                         ],
                       ),
-                      children: [
-                        for(Morador morador in moradores)
-                          personCard(morador)
-                      ]
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  sector(
-                    title: "Status dos sensores",
-                    underlineWidth: 500,
-                    children: [
-                      sensorCard(title: "Sensores de fumaça",icon: Icons.sensors),
-                      sensorCard(title: "Sensores de temperatura",icon: Icons.thermostat_outlined),
-                      sensorCard(title: "Luzes de emergência",icon: MdiIcons.lightbulbOnOutline),
-                      sensorCard(title: "Fechaduras magnéticas",icon: Icons.lock_outline),
-                      sensorCard(title: "Transmissores",icon: MdiIcons.cpu32Bit),
                     ],
-                    // bottomButton: Row(
-                    //   children: [
-                    //     RawMaterialButton(
-                    //       onPressed: (){},
-                    //       child: Container(
-                    //         decoration: BoxDecoration(
-                    //           color: Colors.white,
-                    //           borderRadius: BorderRadius.circular(7.5),
-                    //         ),
-                    //         padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                    //         child: const Center(child: Text("Detalhar\nsensores",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
-                  sector(title: "Relatórios",underlineWidth: 250,
-                    children: [
-                      relatoriosCard(title:"Relatório diário",date: "19/06/2023"),
-                      relatoriosCard(title:"Relatório diário",date: "18/06/2023"),
-                      relatoriosCard(title:"Relatório diário",date: "11/06/2023"),
-                      relatoriosCard(title:"Relatório diário",date: "04/06/2023"),
-                      relatoriosCard(title:"Relatório diário",date: "28/05/2023"),
-                    ],
-                    // bottomButton: Row(
-                    //   children: [
-                    //     RawMaterialButton(
-                    //       onPressed: (){},
-                    //       child: Container(
-                    //         decoration: BoxDecoration(
-                    //           color: Colors.white,
-                    //           borderRadius: BorderRadius.circular(7.5),
-                    //         ),
-                    //         padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 2),
-                    //         child: Center(child: Text("Visualizar\nhistórico",textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24))),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
+            wMorador(),
+            wContato(),
+            wAviso(),
           ],
         ),
       ),
     );
   }
 }
+

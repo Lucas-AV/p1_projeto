@@ -5,6 +5,7 @@ import 'mobile.dart';
 import 'login_page.dart';
 import 'dart:io';
 import 'desktop.dart';
+import 'package:desktop_window/desktop_window.dart';
 
 // ignore_for_file: prefer_const_constructors
 String alertMsg = "ATENÇÃO: Mantenha a calma e siga imediatamente as orientações de evacuação. Dirija-se a saída de emergência mais próxima evitando o uso de elevadores, não retorne ao edifício até receber autorização das autoridades competentes, priorize a sua segurança e a dos demais.";
